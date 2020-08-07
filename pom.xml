@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
- 
+
     <groupId>demo</groupId>
     <artifactId>spring-boot-hello-world</artifactId>
     <version>1.0.0</version>
- 
-     <properties>
+
+    <properties>
         <logback.contrib.version>0.1.5</logback.contrib.version>
     </properties>
 
@@ -16,8 +16,8 @@
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>2.0.3.RELEASE</version>
     </parent>
-     
-     
+
+
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -28,17 +28,23 @@
             <artifactId>newrelic-api</artifactId>
             <version>5.14.0</version>
         </dependency>
-
-      <dependency>
-        <groupId>com.fasterxml.jackson.core</groupId>
-         <artifactId>jackson-core</artifactId>
-        <version>2.9.8</version>
-    </dependency>
-    <dependency>
-        <groupId>com.fasterxml.jackson.core</groupId>
-        <artifactId>jackson-databind</artifactId>
-        <version>2.9.8</version>
-    </dependency>
+        <dependency>
+            <groupId>com.newrelic.agent.java</groupId>
+            <artifactId>newrelic-java</artifactId>
+            <version>5.14.0</version>
+            <scope>provided</scope>
+            <type>zip</type>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-core</artifactId>
+            <version>2.9.8</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.9.8</version>
+        </dependency>
 
 
 
@@ -73,20 +79,45 @@
         </dependency>
 
     </dependencies>
-     
+
     <build>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <version>3.1.1</version>
+                <executions>
+                    <execution>
+                        <id>unpack-newrelic</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>unpack-dependencies</goal>
+                        </goals>
+                        <configuration>
+                            <includeGroupIds>com.newrelic.agent.java</includeGroupIds>
+                            <includeArtifactIds>newrelic-java</includeArtifactIds>
+                            <!-- you can optionally exclude files -->
+                            <!-- <excludes>**/newrelic.yml</excludes> -->
+                            <overWriteReleases>false</overWriteReleases>
+                            <overWriteSnapshots>false</overWriteSnapshots>
+                            <overWriteIfNewer>true</overWriteIfNewer>
+                            <outputDirectory>${project.build.directory}</outputDirectory>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
-    <resources>
-        <resource>
-            <directory>src/main/resources</directory>
-            <filtering>true</filtering>
-        </resource>
-    </resources>
- </build> 
- 
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
+
+    </build>
+
 </project>

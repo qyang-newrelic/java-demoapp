@@ -1,7 +1,14 @@
 #!/bin/bash
 
 
-NR_AGENT="newrelic/newrelic.jar"
+if [ -z "$nr_license_key" ] ; 
+then
+  echo 'Error - no environment variable $nr_license_key ' 
+  echo "Exit"
+  exit 1 
+fi
+
+NR_AGENT="target/newrelic/newrelic.jar"
 
 CATALINA_OPTS="$CATALINA_OPTS -Dnewrelic.config.license_key=$nr_license_key"
 CATALINA_OPTS="$CATALINA_OPTS -Dnewrelic.config.log_level=info"
