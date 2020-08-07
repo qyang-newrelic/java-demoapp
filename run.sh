@@ -1,5 +1,6 @@
 #!/bin/bash
 
+echo "Build package before run:  mvn package"
 
 if [ -z "$nr_license_key" ] ; 
 then
