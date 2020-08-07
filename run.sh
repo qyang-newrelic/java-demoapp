@@ -35,4 +35,4 @@ CATALINA_OPTS="$CATALINA_OPTS -javaagent:$NR_AGENT"; export CATALINA_OPTS
 
 options=$CATALINA_OPTS
 
-java $options -jar target/spring-boot-hello-world-1.0.0.jar
+java $options -jar target/spring-boot-hello-world-1.0.0.jar &
