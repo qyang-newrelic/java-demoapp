@@ -34,10 +34,17 @@ public class OpenTelemetryDemo {
   String apiKey = System.getenv("NR_INSIGHTS_INSERT_KEY");
   String applicationName = "OpenTelemetryDemo";
   
-  public void OpenTelemetryDemo() 
+  public OpenTelemetryDemo() 
   {
     
     this.applicationName = "OpenTelemetryDemo";
+    try {
+      this.init();
+    } 
+    catch (Exception e) {
+      return;
+    }
+    // this.init();
     return;
 
   }
@@ -51,7 +58,7 @@ public class OpenTelemetryDemo {
        
     // 1. The simplest way to configure the New Relic exporters is like this:
     configuration =
-        new Configuration(apiKey, "best service ever")
+        new Configuration(apiKey, applicationName)
             .enableAuditLogging()
             .collectionIntervalSeconds(10);
 

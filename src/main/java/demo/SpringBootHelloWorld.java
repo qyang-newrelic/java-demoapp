@@ -26,15 +26,17 @@ for (Map.Entry<String, String> entry : linkingMetadata.entrySet()) {
 public class SpringBootHelloWorld {
     //public static Supplier<Agent> agentSupplier = NewRelic::getAgent;
     private Logger logger = LoggerFactory.getLogger(SpringBootHelloWorld.class);
-    private OpenTelemetryDemo opDemo; //= new OpenTelemetryDemo();
-
+    private OpenTelemetryDemo opDemo = new OpenTelemetryDemo();
     
+
+  
+
     @RequestMapping("/opentelemetry")
     String openTelemetry() throws Exception 
     {
         //ObjectMapper objectMapper = new ObjectMapper();
-        opDemo = new OpenTelemetryDemo();
-        opDemo.init();
+        //opDemo = new OpenTelemetryDemo();
+        //opDemo.init();
 
         //String agentData = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(linkingMetadata);
         //String agentData = objectMapper.writeValueAsString(linkingMetadata);

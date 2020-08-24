@@ -79,7 +79,7 @@
         </dependency>
 
 
-        
+
         <dependency>
             <groupId>io.opentelemetry</groupId>
             <artifactId>opentelemetry-sdk</artifactId>
@@ -89,12 +89,19 @@
             <groupId>com.newrelic.telemetry</groupId>
             <artifactId>opentelemetry-exporters-newrelic</artifactId>
             <version>0.7.0</version>
-        </dependency> 
+        </dependency>
         <dependency>
             <groupId>com.newrelic.telemetry</groupId>
             <artifactId>telemetry-http-okhttp</artifactId>
             <version>0.7.0</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/org.jetbrains.kotlin/kotlin-stdlib -->
+        <dependency>
+            <groupId>org.jetbrains.kotlin</groupId>
+            <artifactId>kotlin-stdlib</artifactId>
+            <version>1.4.0</version>
+        </dependency>
+
     </dependencies>
 
     <build>
