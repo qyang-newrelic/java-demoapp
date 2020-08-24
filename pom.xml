@@ -78,6 +78,18 @@
             <version>${logback.contrib.version}</version>
         </dependency>
 
+
+        
+        <dependency>
+            <groupId>io.opentelemetry</groupId>
+            <artifactId>opentelemetry-sdk</artifactId>
+            <version>0.7.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.newrelic.telemetry</groupId>
+            <artifactId>opentelemetry-exporters-newrelic</artifactId>
+            <version>0.7.0</version>
+        </dependency>
     </dependencies>
 
     <build>
