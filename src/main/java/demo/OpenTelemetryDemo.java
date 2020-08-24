@@ -19,19 +19,36 @@ import io.opentelemetry.trace.Span.Kind;
 import io.opentelemetry.trace.Status;
 import io.opentelemetry.trace.Tracer;
 import java.util.Random;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class OpenTelemetryDemo {
+  private Logger logger = LoggerFactory.getLogger(OpenTelemetryDemo.class);
+
   LongCounter spanCounter ;
   Tracer tracer ;
   Meter meter ;
   Configuration configuration;
   LongValueRecorder spanTimer;
   BoundLongValueRecorder boundTimer;
+  String apiKey = System.getenv("NR_INSIGHTS_INSERT_KEY");
+  String applicationName = "OpenTelemetryDemo";
+  
+  public void OpenTelemetryDemo() 
+  {
+    
+    this.applicationName = "OpenTelemetryDemo";
+    return;
 
-  // public static void main(String[] args) throws InterruptedException {
-  public void OpenTelemetryDemo (String apiKey, String appName) throws InterruptedException {
+  }
+
+  public void init() throws Exception
+  {
     //String apiKey = System.getenv("INSIGHTS_INSERT_KEY");
-
+    
+    // logger = LoggerFactory.getLogger(OpenTelemetryDemo.class);
+    logger.info("initialize the OpenTelemetry Exporter");
+       
     // 1. The simplest way to configure the New Relic exporters is like this:
     configuration =
         new Configuration(apiKey, "best service ever")
@@ -46,8 +63,8 @@ public class OpenTelemetryDemo {
     // 2. Create an OpenTelemetry `Tracer` and a `Meter` and use them for some manual
     // instrumentation.
 
-    tracer = OpenTelemetry.getTracerProvider().get(appName, "1.0");
-    meter = OpenTelemetry.getMeterProvider().get(appName, "1.0");
+    tracer = OpenTelemetry.getTracerProvider().get(applicationName, "1.0");
+    meter = OpenTelemetry.getMeterProvider().get(applicationName, "1.0");
 
     // 3. Here is an example of a counter
     spanCounter =
@@ -74,10 +91,14 @@ public class OpenTelemetryDemo {
     // clean up so the JVM can exit. Note: these will flush any data to the exporter
     // before they exit.
     // NewRelicExporters.shutdown();
-  }
-  public void doReuqest(String requestName) throws Exception
-  {
 
+    
+  }
+
+  public void doRequest(String requestName) throws Exception
+  {
+    logger.info("getting request : " + requestName);
+  
     doSomeSimulatedWork();
   }
 
